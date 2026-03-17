@@ -1,2 +1,13 @@
 
-<p>hola soy login</p>
+<div class="login-container">
+  <h2>Login o Registro</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <input type="text" placeholder="Usuario" formControlName="username" required>
+    <button type="submit">{{ isNewUser ? 'Registrar' : 'Login' }}</button>
+  </form>
+
+  <button (click)="toggleMode()">
+    {{ isNewUser ? 'Ya tengo usuario' : 'Crear nuevo usuario' }}
+  </button>
+</div>

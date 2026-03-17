@@ -1,1 +1,15 @@
-<p>chat-list works!</p>
+<div class="chat-list">
+  @for (chat of chats; track chat.id) {
+    <div class="chat-item" (click)="chatSelected.emit(chat)">
+      <img class="avatar" [src]="chat.avatar" alt="{{chat.name}}">
+      <div class="chat-info">
+        <div class="chat-name">{{chat.name}}</div>
+        @if(chat.status === 'online') {
+          <small class="status online">online</small>
+        } @else {
+          <small class="status offline">offline</small>
+        }
+      </div>
+    </div>
+  }
+</div>

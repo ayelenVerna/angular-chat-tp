@@ -1,8 +1,16 @@
-<p>aca ves los chats</p>
-<div class="chat-layout">
+<div class="layout">
 
-  <app-chat-list></app-chat-list>
+  <!-- Lista de chats -->
+  <app-chat-list
+    [chats]="chats"
+    (chatSelected)="selectChat($event)">
+  </app-chat-list>
 
-  <app-chat-window></app-chat-window>
+  <!-- Ventana de chat -->
+  <app-chat-window
+    [chat]="selectedChat"
+    (messageSent)="addMessage($event)">
+  </app-chat-window>
 
 </div>
+

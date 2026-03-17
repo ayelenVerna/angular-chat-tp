@@ -1,6 +1,24 @@
-.footer{
-  background:#1f2937;
-  color:white;
-  text-align:center;
-  padding:15px;
+footer {
+  width: 100%;
+  height: 60px; /* altura del footer */
+  background-color: #25d366; /* verde tipo WhatsApp */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  position: fixed; /* pegado abajo */
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* encima de todo */
+}
+
+/* Opcional: sombra sutil arriba */
+footer::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(0,0,0,0.1);
 }

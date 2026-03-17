@@ -1,10 +1,36 @@
 import { Component } from '@angular/core';
-
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [],
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css']
 })
-export class Login {}
+export class Login {
+
+  loginForm = new FormGroup({
+    username: new FormControl('')
+  });
+
+  isNewUser = false;
+
+  constructor(private router: Router) {}
+
+  toggleMode() {
+    this.isNewUser = !this.isNewUser;
+  }
+
+  submit() {
+    const username = this.loginForm.value.username?.trim();
+    if (!username) return;
+
+    // Guardar el usuario en localStorage (simple)
+    localStorage.setItem('currentUser', username);
+
+    // Ir a la página de chats
+    this.router.navigate(['/chats']);
+  }
+}

@@ -1,1 +1,9 @@
-<p>chat-input works!</p>
+<div class="input-area">
+  <input
+    type="text"
+    placeholder="Escribí un mensaje"
+    [formControl]="messageControl"
+    (keydown.enter)="send()"
+  >
+  <button (click)="send()">Enviar</button>
+</div>

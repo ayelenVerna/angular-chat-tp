@@ -1,1 +1,7 @@
-<p>chat-message works!</p>
+<div 
+  class="message"
+  [ngClass]="message.sender === 'Bot' ? 'bot' : 'user'">
+
+  {{ message.text }}
+
+</div>

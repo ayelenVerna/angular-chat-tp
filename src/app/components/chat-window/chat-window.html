@@ -1,1 +1,24 @@
-<p>chat-window works!</p>
+@if(chat) {
+
+<div class="chat-window">
+
+  <!-- Nombre del contacto -->
+  <h2>{{chat.name}}</h2>
+
+  <!-- Mensajes -->
+  <div class="messages" #messagesContainer>
+    @for(msg of chat.messages; track $index) {
+      <app-chat-message [message]="msg"></app-chat-message>
+    }
+  </div>
+
+  <!-- Input para enviar mensajes -->
+  <app-chat-input (messageSent)="addMessage($event)"></app-chat-input>
+
+</div>
+
+} @else {
+  <div class="chat-window">
+    <p style="text-align:center; margin-top:20px;">Seleccioná un chat para comenzar la conversación</p>
+  </div>
+}

@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
-import { ChatInput } from "../chat-input/chat-input";
-import { ChatWindow } from '../chat-window/chat-window';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-chat-list',
-  imports: [ChatInput,ChatWindow],
+  standalone: true,
   templateUrl: './chat-list.html',
-  styleUrl: './chat-list.css',
+  styleUrls: ['./chat-list.css']
 })
-export class ChatList {}
+export class ChatList {
+
+  // Recibe los chats desde el componente padre
+  @Input() chats: any[] = [];
+
+  // Emite el chat seleccionado al componente padre
+  @Output() chatSelected = new EventEmitter<any>();
+
+}

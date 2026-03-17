@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common'; // 👈 IMPORTANTE
 
 @Component({
   selector: 'app-chat-message',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule], // 👈 AGREGAR ESTO
   templateUrl: './chat-message.html',
-  styleUrl: './chat-message.css',
+  styleUrls: ['./chat-message.css']
 })
-export class ChatMessage {}
+export class ChatMessage {
+  @Input() message: any;
+}
