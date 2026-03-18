@@ -1,35 +1,24 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChatInput } from '../chat-input/chat-input';
+
 import { ChatMessage } from '../chat-message/chat-message';
+import { ChatInput } from '../chat-input/chat-input';
 
 @Component({
   selector: 'app-chat-window',
   standalone: true,
-  imports: [CommonModule, ChatInput, ChatMessage],
+  imports: [CommonModule, ChatMessage, ChatInput],
   templateUrl: './chat-window.html',
   styleUrls: ['./chat-window.css']
 })
-export class ChatWindow implements AfterViewChecked {
+export class ChatWindow {
 
-  @Input() chat: any; // chat seleccionado
-  @Output() messageSent = new EventEmitter<any>(); // emite mensajes al padre
+  @Input() chat: any;
+  @Input() currentUser!: string; // 👈 ESTO FALTABA
 
-  @ViewChild('messagesContainer') messagesContainer!: ElementRef;
+  @Output() messageSent = new EventEmitter<any>();
 
-  ngAfterViewChecked() {
-    this.scrollToBottom();
-  }
-
-  // Se llama desde chat-input
-  addMessage(message: any) {
-    this.messageSent.emit(message); // lo envía al componente padre Chats
-  }
-
-  private scrollToBottom() {
-    try {
-      if (this.messagesContainer)
-        this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-    } catch {}
+  sendMessage(message: any) {
+    this.messageSent.emit(message);
   }
 }

@@ -1,24 +1,47 @@
-@if(chat) {
-
 <div class="chat-window">
 
-  <!-- Nombre del contacto -->
-  <h2>{{chat.name}}</h2>
+  @if (chat) {
 
-  <!-- Mensajes -->
-  <div class="messages" #messagesContainer>
-    @for(msg of chat.messages; track $index) {
-      <app-chat-message [message]="msg"></app-chat-message>
-    }
-  </div>
+    <!-- Header del chat -->
+    <div class="chat-header" [attr.data-id]="chat.id">
+      <img [src]="chat.avatar" class="avatar">
+      <div class="info">
+        <h3>{{ chat.name }}</h3>
 
-  <!-- Input para enviar mensajes -->
-  <app-chat-input (messageSent)="addMessage($event)"></app-chat-input>
+        @if (chat.status === 'online') {
+          <small class="online">Online</small>
+        } @else {
+          <small class="offline">
+            Última vez: {{ chat.lastSeen || 'hace un rato' }}
+          </small>
+        }
+
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div class="messages">
+
+      @for (msg of chat.messages; track $index) {
+        <app-chat-message
+          [message]="msg">
+        </app-chat-message>
+      }
+
+    </div>
+
+    <!-- Input -->
+    <app-chat-input
+      (messageSent)="sendMessage($event)">
+    </app-chat-input>
+
+  } @else {
+
+    <!-- Cuando no hay chat seleccionado -->
+    <div class="no-chat">
+      <p>Seleccioná un chat para comenzar</p>
+    </div>
+
+  }
 
 </div>
-
-} @else {
-  <div class="chat-window">
-    <p style="text-align:center; margin-top:20px;">Seleccioná un chat para comenzar la conversación</p>
-  </div>
-}

@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* contenedor */
+.input-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* input */
+input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+/* efecto focus */
+input:focus {
+  border-color: #25d366;
+}
+
+/* botón */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #25d366;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* hover */
+button:hover {
+  background-color: #1ebe5d;
+}
+
+/* deshabilitado */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

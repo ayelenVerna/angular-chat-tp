@@ -1,64 +1,19 @@
-/* Contenedor de la lista de chats */
-.chat-list {
-  width: 30%; /* ocupa 30% del ancho */
-  border-right: 1px solid #ddd;
-  height: 100%;
+.container {
+  display: flex;
+  height: calc(100vh - 120px); /* ajustá si tu header/footer ocupan más */
+}
+
+/* izquierda */
+app-chat-list {
+  width: 30%;
+  min-width: 250px;
+  border-right: 1px solid #ccc;
   overflow-y: auto;
-  background-color: #f7f7f7;
-  padding-top: 10px; /* un poco de espacio arriba */
 }
 
-/* Cada contacto */
-.chat-item {
+/* 🔴 ESTE ES EL FIX IMPORTANTE */
+app-chat-window {
+  flex: 1;
   display: flex;
-  align-items: center;
-  padding: 15px 10px; /* más espacio vertical */
-  cursor: pointer;
-  gap: 15px; /* separación entre avatar y texto */
-  transition: background 0.2s;
-  min-height: 60px; /* altura mínima para que sea cómodo */
-}
-
-/* Efecto hover */
-.chat-item:hover {
-  background-color: #e5e5e5;
-}
-
-/* Avatar del contacto */
-.avatar {
-  width: 50px; /* más grande que antes */
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Info del contacto (nombre y estado) */
-.chat-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden; /* para que no se desborde el nombre */
-}
-
-/* Nombre del contacto */
-.chat-name {
-  font-weight: bold;
-  font-size: 16px; /* más grande y legible */
-  white-space: nowrap; /* evitar que el nombre haga wrap */
-  overflow: hidden;
-  text-overflow: ellipsis; /* corta con "..." si es muy largo */
-}
-
-/* Estado del contacto */
-.status {
-  font-size: 12px;
-  color: gray;
-}
-
-.status.online {
-  color: #25d366; /* verde tipo WhatsApp */
-}
-
-.status.offline {
-  color: #999;
+  height: 100%;
 }

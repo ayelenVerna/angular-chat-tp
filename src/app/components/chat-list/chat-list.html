@@ -1,15 +1,38 @@
 <div class="chat-list">
+
+  <!-- crear nuevo chat -->
+  <div class="new-chat">
+    <input
+      type="text"
+      placeholder="Nuevo chat..."
+      [formControl]="newChatControl"
+      (keydown.enter)="createChat()"
+    >
+    <button (click)="createChat()">+</button>
+  </div>
+
+  <!-- lista de contactos -->
   @for (chat of chats; track chat.id) {
-    <div class="chat-item" (click)="chatSelected.emit(chat)">
-      <img class="avatar" [src]="chat.avatar" alt="{{chat.name}}">
-      <div class="chat-info">
-        <div class="chat-name">{{chat.name}}</div>
-        @if(chat.status === 'online') {
-          <small class="status online">online</small>
+
+    <div class="chat-item" (click)="selectChat(chat)">
+
+      <img [src]="chat.avatar" class="avatar">
+
+      <div class="info">
+        <h4>{{ chat.name }}</h4>
+
+        @if (chat.status === 'online') {
+          <small class="online">Online</small>
         } @else {
-          <small class="status offline">offline</small>
+          <small class="offline">
+            {{ chat.lastSeen }}
+          </small>
         }
+
       </div>
+
     </div>
+
   }
+
 </div>

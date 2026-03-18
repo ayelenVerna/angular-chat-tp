@@ -1,16 +1,23 @@
-<div class="layout">
+<div class="container">
 
-  <!-- Lista de chats -->
+  <!-- IZQUIERDA -->
   <app-chat-list
     [chats]="chats"
-    (chatSelected)="selectChat($event)">
+    (chatSelected)="selectChat($event)"
+    (newChat)="addChat($event)">
   </app-chat-list>
 
-  <!-- Ventana de chat -->
-  <app-chat-window
-    [chat]="selectedChat"
-    (messageSent)="addMessage($event)">
-  </app-chat-window>
+  <!-- DERECHA -->
+  @if (selectedChat) {
+    <app-chat-window
+      [chat]="selectedChat"
+      [currentUser]="currentUser"
+      (messageSent)="addMessage($event)">
+    </app-chat-window>
+  } @else {
+    <div class="no-chat">
+      <p>Seleccioná un chat</p>
+    </div>
+  }
 
 </div>
-
