@@ -14,7 +14,7 @@ import { ChatInput } from '../chat-input/chat-input';
 export class ChatWindow {
 
   @Input() chat: any;
-  @Input() currentUser!: string; // 👈 ESTO FALTABA
+@Input() currentUser: string = '';
 
   @Output() messageSent = new EventEmitter<any>();
 

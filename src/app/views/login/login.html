@@ -1,13 +1,12 @@
-
 <div class="login-container">
-  <h2>Login o Registro</h2>
 
-  <form [formGroup]="loginForm" (ngSubmit)="submit()">
-    <input type="text" placeholder="Usuario" formControlName="username" required>
-    <button type="submit">{{ isNewUser ? 'Registrar' : 'Login' }}</button>
-  </form>
+  <h2>Login / Registro</h2>
 
-  <button (click)="toggleMode()">
-    {{ isNewUser ? 'Ya tengo usuario' : 'Crear nuevo usuario' }}
-  </button>
+  <input placeholder="Usuario" [formControl]="username">
+  <input placeholder="Email" [formControl]="email">
+  <input type="password" placeholder="Contraseña" [formControl]="password">
+
+  <button (click)="login()">Ingresar</button>
+  <button (click)="register()">Registrarse</button>
+
 </div>

@@ -11,19 +11,19 @@ import { CommonModule } from '@angular/common';
 })
 export class ChatInput {
 
-  @Output() messageSent = new EventEmitter<any>();
+  @Output() messageSent = new EventEmitter<string>(); // 👈 mejor tipado
 
-  messageControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(1)
-  ]);
+  messageControl = new FormControl('', {
+  nonNullable: true,
+  validators: [Validators.required, Validators.minLength(1)]
+});
 
   sendMessage() {
     const text = this.messageControl.value?.trim();
 
     if (!text) return;
 
-    this.messageSent.emit({ text });
+    this.messageSent.emit(text); // ✅ FIX
 
     this.messageControl.reset();
   }

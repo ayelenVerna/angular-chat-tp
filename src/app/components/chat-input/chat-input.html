@@ -6,9 +6,11 @@
     [formControl]="messageControl"
     (keydown.enter)="sendMessage()"
   >
-
-  <button (click)="sendMessage()">
-    Enviar
-  </button>
+@if (messageControl.invalid && messageControl.touched) {
+  <small class="error">Escribí un mensaje</small>
+}
+ <button (click)="sendMessage()" [disabled]="messageControl.invalid">
+  Enviar
+</button>
 
 </div>

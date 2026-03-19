@@ -1,36 +1,62 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './login.html'
 })
 export class Login {
 
-  loginForm = new FormGroup({
-    username: new FormControl('')
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  username = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required]
   });
 
-  isNewUser = false;
+  email = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.email]
+  });
 
-  constructor(private router: Router) {}
+  password = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(4)]
+  });
 
-  toggleMode() {
-    this.isNewUser = !this.isNewUser;
+  register() {
+    if (this.username.invalid || this.email.invalid || this.password.invalid) return;
+
+    this.authService.register({
+      username: this.username.value,
+      email: this.email.value,
+      password: this.password.value
+    });
+
+    this.router.navigate(['/chats']);
   }
 
-  submit() {
-    const username = this.loginForm.value.username?.trim();
-    if (!username) return;
+  login() {
+    if (this.email.invalid || this.password.invalid) return;
 
-    // Guardar el usuario en localStorage (simple)
-    localStorage.setItem('currentUser', username);
+    const success = this.authService.login(
+      this.email.value,
+      this.password.value
+    );
 
-    // Ir a la página de chats
-    this.router.navigate(['/chats']);
+    if (success) {
+      this.router.navigate(['/chats']);
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
   }
 }

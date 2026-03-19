@@ -2,17 +2,17 @@
 
   <!-- IZQUIERDA -->
   <app-chat-list
-    [chats]="chats"
-    (chatSelected)="selectChat($event)"
-    (newChat)="addChat($event)">
+    [chats]="chatService.chats"
+    (chatSelected)="chatService.selectChat($event)"
+    (newChat)="chatService.addChat($event)">
   </app-chat-list>
 
   <!-- DERECHA -->
-  @if (selectedChat) {
+  @if (chatService.selectedChat) {
     <app-chat-window
-      [chat]="selectedChat"
-      [currentUser]="currentUser"
-      (messageSent)="addMessage($event)">
+      [chat]="chatService.selectedChat"
+      [currentUser]="chatService.currentUser"
+      (messageSent)="chatService.addMessage($event)">
     </app-chat-window>
   } @else {
     <div class="no-chat">
