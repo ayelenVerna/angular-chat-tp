@@ -1,10 +1,21 @@
 import { Routes } from '@angular/router';
-import { Home } from './views/home/home';
-import { Login } from './views/login/login';
-import { Chats } from './views/chats/chats';
+
+import { LoginComponent } from './views/login/login';
+import { ChatsComponent } from './views/chats/chats';
+
+import { authGuard } from './guards/auth-guard';
+
 
 export const routes: Routes = [
-    {path:"",component:Home},
-    {path:"login",component:Login},
-    { path: "chats", component: Chats }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  { path: 'login', component: LoginComponent },
+
+  {
+    path: 'chats',
+    component: ChatsComponent,
+    canActivate: [authGuard] // 🔥 PROTEGIDA
+  },
+
+  { path: '**', redirectTo: 'login' }
 ];

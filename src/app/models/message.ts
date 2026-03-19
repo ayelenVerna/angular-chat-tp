@@ -1,4 +1,5 @@
 export interface Message {
   text: string;
-  sender: string;
+  from: string; // 'me' o 'other'
+  date: Date;
 }

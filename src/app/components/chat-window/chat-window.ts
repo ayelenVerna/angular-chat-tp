@@ -1,8 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { ChatMessage } from '../chat-message/chat-message';
 import { ChatInput } from '../chat-input/chat-input';
+
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-chat-window',
@@ -14,11 +17,30 @@ import { ChatInput } from '../chat-input/chat-input';
 export class ChatWindow {
 
   @Input() chat: any;
-@Input() currentUser: string = '';
+  @Input() currentUser: string | null = null;
 
-  @Output() messageSent = new EventEmitter<any>();
+  @Output() back = new EventEmitter<void>();
+  @Output() messageSent = new EventEmitter<string>();
 
-  sendMessage(message: any) {
-    this.messageSent.emit(message);
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  // 👉 enviar mensaje
+  sendMessage(text: string) {
+    this.messageSent.emit(text);
   }
+
+  // 👉 volver (mobile)
+  goBack() {
+    this.back.emit();
+  }
+
+  // 👉 logout
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
 }

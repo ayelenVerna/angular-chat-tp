@@ -1,16 +1,22 @@
-<div class="input-container">
+<div class="chat-input">
 
   <input
     type="text"
     placeholder="Escribí un mensaje..."
     [formControl]="messageControl"
     (keydown.enter)="sendMessage()"
-  >
-@if (messageControl.invalid && messageControl.touched) {
-  <small class="error">Escribí un mensaje</small>
-}
- <button (click)="sendMessage()" [disabled]="messageControl.invalid">
-  Enviar
-</button>
+  />
+
+  <button
+    (click)="sendMessage()"
+    [disabled]="messageControl.invalid">
+    Enviar
+  </button>
 
 </div>
+
+@if (messageControl.invalid && messageControl.touched) {
+  <small class="error">
+    Escribí un mensaje
+  </small>
+}

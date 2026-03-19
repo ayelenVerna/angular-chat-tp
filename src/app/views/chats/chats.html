@@ -1,23 +1,76 @@
-<div class="container">
+<div class="container" [class.show-chat]="selectedChat">
 
-  <!-- IZQUIERDA -->
-  <app-chat-list
-    [chats]="chatService.chats"
-    (chatSelected)="chatService.selectChat($event)"
-    (newChat)="chatService.addChat($event)">
-  </app-chat-list>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
 
-  <!-- DERECHA -->
-  @if (chatService.selectedChat) {
-    <app-chat-window
-      [chat]="chatService.selectedChat"
-      [currentUser]="chatService.currentUser"
-      (messageSent)="chatService.addMessage($event)">
-    </app-chat-window>
-  } @else {
-    <div class="no-chat">
-      <p>Seleccioná un chat</p>
-    </div>
-  }
+    @for (chat of chats; track chat.id) {
+      <div class="chat-item" (click)="selectChat(chat)">
+        <img class="avatar" [src]="chat.avatar" />
+
+        <div class="chat-info">
+          <div class="name">{{ chat.name }}</div>
+          <div class="status">
+            {{ chat.status === 'online' ? '🟢 En línea' : '⚫ Sin conexión' }}
+          </div>
+        </div>
+      </div>
+    }
+
+    <button class="logout" (click)="logout()">Cerrar sesión</button>
+
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat">
+
+    @if (!selectedChat) {
+      <div class="empty">
+        Seleccioná un chat
+      </div>
+    }
+
+    @if (selectedChat) {
+
+      <!-- VOLVER (mobile) -->
+      <button class="back" (click)="selectedChat = null">
+        ⬅ Volver
+      </button>
+
+      <!-- HEADER -->
+      <div class="chat-header">
+        <img class="avatar" [src]="selectedChat.avatar" />
+        <div>
+          <div class="name">{{ selectedChat.name }}</div>
+          <div class="status">{{ selectedChat.status }}</div>
+        </div>
+      </div>
+
+      <!-- MENSAJES -->
+      <div class="messages">
+
+        @for (msg of selectedChat.messages; track $index) {
+          <div
+            class="message"
+            [class.me]="msg.from === currentUserName">
+
+            {{ msg.text }}
+
+          </div>
+        }
+
+      </div>
+
+      <!-- INPUT -->
+      <div class="input-area">
+        <input
+          [(ngModel)]="newMessage"
+          placeholder="Escribí un mensaje..."
+        />
+        <button (click)="sendMessage()">Enviar</button>
+      </div>
+
+    }
+
+  </div>
 
 </div>

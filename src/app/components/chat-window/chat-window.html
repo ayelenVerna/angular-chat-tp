@@ -1,10 +1,17 @@
 <div class="chat-window">
 
+  <!-- Botón volver (mobile) -->
+  <button class="back-btn" (click)="goBack()">
+    ← Volver
+  </button>
+
   @if (chat) {
 
-    <!-- Header del chat -->
+    <!-- Header -->
     <div class="chat-header" [attr.data-id]="chat.id">
+
       <img [src]="chat.avatar" class="avatar">
+
       <div class="info">
         <h3>{{ chat.name }}</h3>
 
@@ -15,8 +22,13 @@
             Última vez: {{ chat.lastSeen || 'hace un rato' }}
           </small>
         }
-
       </div>
+
+      <!-- 🔴 LOGOUT -->
+      <button class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+
     </div>
 
     <!-- Mensajes -->
@@ -31,13 +43,18 @@
     </div>
 
     <!-- Input -->
-    <app-chat-input
-      (messageSent)="sendMessage($event)">
-    </app-chat-input>
+    @if (currentUser !== null) {
+      <app-chat-input
+        (messageSent)="sendMessage($event)">
+      </app-chat-input>
+    } @else {
+      <p class="no-user">
+        Debes iniciar sesión para enviar mensajes
+      </p>
+    }
 
   } @else {
 
-    <!-- Cuando no hay chat seleccionado -->
     <div class="no-chat">
       <p>Seleccioná un chat para comenzar</p>
     </div>

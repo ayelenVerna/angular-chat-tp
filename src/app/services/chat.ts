@@ -1,76 +1,80 @@
 import { Injectable } from '@angular/core';
 import { Chat } from '../models/chat';
 import { Message } from '../models/message';
-import { AuthService } from './auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  constructor(private authService: AuthService) {}
+  private STORAGE_KEY = 'chats';
 
-  chats: Chat[] = [
-    {
-      id: 1,
-      name: 'Juan',
-      avatar: 'https://i.pravatar.cc/50?img=1',
-      status: 'online',
-      lastSeen: '',
-      messages: [
-        { text: 'Hola 👋', sender: 'Juan' }
-      ]
-    },
-    {
-      id: 2,
-      name: 'María',
-      avatar: 'https://i.pravatar.cc/50?img=2',
-      status: 'offline',
-      lastSeen: 'hace 5 min',
-      messages: []
+  // 📥 Obtener chats
+  getChats(): Chat[] {
+    const stored = localStorage.getItem(this.STORAGE_KEY);
+
+    if (stored) {
+      return JSON.parse(stored);
     }
-  ];
 
-  selectedChat: Chat | null = null;
+    // 🔥 DATA INICIAL (si no hay nada)
+    const initialChats: Chat[] = [
+      {
+        id: 1,
+        name: 'Juan',
+       avatar: 'https://i.pravatar.cc/150?img=1',
+        status: 'online',
+        lastSeen: '',
+        messages: [
+          {
+            text: 'Hola!',
+            from: 'Juan',
+            date: new Date()
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: 'María',
+       avatar: 'https://i.pravatar.cc/150?img=2',
+        status: 'offline',
+        lastSeen: 'Ayer',
+        messages: [
+          {
+            text: '¿Cómo estás?',
+            from: 'María',
+            date: new Date()
+          }
+        ]
+      }
+    ];
 
-  get currentUser(): string {
-  return this.authService.currentUser?.username || 'Anon';
-}
-
-  selectChat(chat: Chat) {
-    this.selectedChat = chat;
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(initialChats));
+    return initialChats;
   }
 
-  addChat(name: string) {
-    const newChat: Chat = {
-      id: Date.now(),
-      name,
-      avatar: 'https://i.pravatar.cc/50?u=' + name,
-      status: 'online',
-      lastSeen: '',
-      messages: []
-    };
-
-    this.chats.push(newChat);
+  // 💾 Guardar chats
+  saveChats(chats: Chat[]) {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(chats));
   }
 
-  addMessage(text: string) {
-    if (!this.selectedChat) return;
+  // 💬 Enviar mensaje
+  sendMessage(chatId: number, text: string) {
+    const chats = this.getChats();
+
+    const chat = chats.find(c => c.id === chatId);
+    if (!chat) return;
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
 
     const newMessage: Message = {
-      text,
-      sender: this.currentUser
+      text: text,
+      from: currentUser.name || 'me',
+      date: new Date()
     };
 
-    this.selectedChat.messages.push(newMessage);
+    chat.messages.push(newMessage);
 
-    setTimeout(() => {
-      const botMessage: Message = {
-        text: 'Respuesta automática 🤖',
-        sender: 'Bot'
-      };
-
-      this.selectedChat?.messages.push(botMessage);
-    }, 1000);
+    this.saveChats(chats);
   }
 }
