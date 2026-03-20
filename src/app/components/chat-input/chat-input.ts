@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ChatInput {
 
-  @Output() messageSent = new EventEmitter<string>(); // 👈 mejor tipado
+  @Output() messageSent = new EventEmitter<string>(); 
 
   messageControl = new FormControl('', {
   nonNullable: true,
@@ -23,7 +23,7 @@ export class ChatInput {
 
     if (!text) return;
 
-    this.messageSent.emit(text); // ✅ FIX
+    this.messageSent.emit(text); 
 
     this.messageControl.reset();
   }

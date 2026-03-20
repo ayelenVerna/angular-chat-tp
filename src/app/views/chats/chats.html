@@ -1,6 +1,6 @@
 <div class="container" [class.show-chat]="selectedChat">
 
-  <!-- SIDEBAR -->
+ 
   <div class="sidebar">
 
     @for (chat of chats; track chat.id) {
@@ -20,7 +20,7 @@
 
   </div>
 
-  <!-- CHAT -->
+ 
   <div class="chat">
 
     @if (!selectedChat) {
@@ -31,12 +31,12 @@
 
     @if (selectedChat) {
 
-      <!-- VOLVER (mobile) -->
+     
       <button class="back" (click)="selectedChat = null">
         ⬅ Volver
       </button>
 
-      <!-- HEADER -->
+     
       <div class="chat-header">
         <img class="avatar" [src]="selectedChat.avatar" />
         <div>
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <!-- MENSAJES -->
+      
       <div class="messages">
 
         @for (msg of selectedChat.messages; track $index) {
@@ -60,7 +60,7 @@
 
       </div>
 
-      <!-- INPUT -->
+      
       <div class="input-area">
         <input
           [(ngModel)]="newMessage"

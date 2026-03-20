@@ -1,59 +1,42 @@
-# AngularTp
+App desarrollada con Angular que simula funcionamiento basico de whatsapp, registro de usuarios, inicio de sesion y envio de mensajes, guardando historial.
+Para ejecutar el proyecto:
+1-clonar repositorio
+2-instalar dependencias: npm install
+3-ejecutar:ng serve
+4-abrir el navegador de localhost
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+Fuinciones basicas de la app:
+Registro de Usuario
+Inicio de Sesión
+Persistencia de sesión (localStorage)
+Envio de mensajes
+Visualizacion de conversaciones
+Cierre de Sesion
 
-## Development server
+Su Estructura: codigo estructurado en diferentes carpetas segun funcion.logica separada
+Src/App/Components/ (componentes reutilizables de la interfaz usuario)
+            chat-input/
+            chat-list/
+            chat-message/
+            chat-window/
+            footer/
+            header/
+        guards/ (controlan acceso a chats sin sesion iniciada)
+            auth/
+        models/ (definen la interfaces de la app)
+            chat/
+            message/
+        services/ (logica de negocio y manejo de datos)
+            auth/
+            chat/
+        views/ (vistas principales de la app. rutas)
+            chats/
+            home/
+            login/
+Flujo de la App:
+El usuario accede a la Home o se dirige a login
+Al iniciar sesion se guarda la info en localstorage y el usuario accede a la vista Chats
+Aca puede seleccionar el chat y enviar mensajes. Recibe mensaje automatico del contacto.
+Las rutas protegidas son controladas por el AuthGuard
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Se estructuro en base a la separacion de responsabilidades, reutilizacion de componentes, navegacion entre rutas,manejo sentralizado de estado (services) y proteccion de rutas (guards).

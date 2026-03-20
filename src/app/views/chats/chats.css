@@ -19,7 +19,7 @@
   flex-direction: column;
   background: #fff;
   overflow-y: auto;
-  padding-bottom: 60px; /* 🔥 evita que tape logout */
+  padding-bottom: 60px; 
 }
 /* ITEM CHAT */
 .chat-item {
@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column;
   background: #e5ddd5;
-  padding-bottom: 60px; /* 🔥 espacio para el footer */
+  padding-bottom: 60px;
 }
 
 /* HEADER */

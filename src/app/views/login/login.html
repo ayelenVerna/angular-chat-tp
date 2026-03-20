@@ -1,26 +1,25 @@
-<div style="padding: 50px; text-align: center;">
+<div class="login-container">
 
-  <h2>@if (isLogin) { Login } @else { Registro }</h2>
+  <h2>{{ isLogin ? 'Iniciar sesión' : 'Crear cuenta' }}</h2>
 
+  <!-- SOLO EN REGISTRO -->
   @if (!isLogin) {
     <input [(ngModel)]="name" placeholder="Nombre" />
-    <br /><br />
   }
 
   <input [(ngModel)]="email" placeholder="Email" />
-  <br /><br />
-
   <input [(ngModel)]="password" type="password" placeholder="Contraseña" />
-  <br /><br />
 
   <button (click)="submit()">
-    @if (isLogin) { Ingresar } @else { Registrarse }
+    {{ isLogin ? 'Ingresar' : 'Registrarse' }}
   </button>
 
-  <br /><br />
+  <p class="toggle-text">
+    {{ isLogin ? '¿No tenés cuenta?' : '¿Ya tenés cuenta?' }}
+  </p>
 
-  <button (click)="toggleMode()">
-    @if (isLogin) { Crear cuenta } @else { Ya tengo cuenta }
+  <button class="link-btn" (click)="toggleMode()">
+    {{ isLogin ? 'Registrarse' : 'Iniciar sesión' }}
   </button>
 
 </div>

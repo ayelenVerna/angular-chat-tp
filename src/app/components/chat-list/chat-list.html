@@ -1,6 +1,6 @@
 <div class="chat-list">
 
-  <!-- crear nuevo chat -->
+ 
   <div class="new-chat">
     <input
       type="text"
@@ -11,7 +11,7 @@
     <button (click)="createChat()">+</button>
   </div>
 
-  <!-- lista de contactos -->
+  
   @for (chat of chats; track chat.id) {
 
     <div class="chat-item" (click)="selectChat(chat)">

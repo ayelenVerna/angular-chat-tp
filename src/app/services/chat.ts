@@ -53,12 +53,12 @@ export class ChatService {
     return initialChats;
   }
 
-  // 💾 Guardar chats
+ 
   saveChats(chats: Chat[]) {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(chats));
   }
 
-  // 💬 Enviar mensaje
+  
   sendMessage(chatId: number, text: string) {
     const chats = this.getChats();
 

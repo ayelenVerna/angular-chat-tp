@@ -27,17 +27,17 @@ export class ChatWindow {
     private router: Router
   ) {}
 
-  // 👉 enviar mensaje
+  
   sendMessage(text: string) {
     this.messageSent.emit(text);
   }
 
-  // 👉 volver (mobile)
+  
   goBack() {
     this.back.emit();
   }
 
-  // 👉 logout
+ 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);

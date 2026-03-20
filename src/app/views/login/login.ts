@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './login.html',
+  styleUrls: ['./login.css']
 })
 export class LoginComponent {
 
@@ -46,8 +47,11 @@ export class LoginComponent {
       return;
     }
 
+    // 🔥 guardar sesión
     this.auth.login(user);
-    this.router.navigate(['/chats']);
+
+    // 🔥 navegación limpia
+    this.router.navigateByUrl('/chats');
   }
 
   register() {

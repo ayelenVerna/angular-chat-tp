@@ -5,26 +5,22 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  currentUser: any = null;
-
-  constructor() {
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      this.currentUser = JSON.parse(storedUser);
-    }
-  }
+  private STORAGE_KEY = 'currentUser';
 
   login(user: any) {
-    this.currentUser = user;
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
   }
 
   logout() {
-    this.currentUser = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem(this.STORAGE_KEY);
+  }
+
+  getUser() {
+    const user = localStorage.getItem(this.STORAGE_KEY);
+    return user ? JSON.parse(user) : null;
   }
 
   isLoggedIn(): boolean {
-    return !!this.currentUser;
+    return !!localStorage.getItem(this.STORAGE_KEY);
   }
 }

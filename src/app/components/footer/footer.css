@@ -1,19 +1,19 @@
 footer {
   width: 100%;
-  height: 60px; /* altura del footer */
-  background-color: #25d366; /* verde tipo WhatsApp */
+  height: 60px; 
+  background-color: #25d366; 
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  position: fixed; /* pegado abajo */
+  position: fixed; 
   bottom: 0;
   left: 0;
-  z-index: 100; /* encima de todo */
+  z-index: 100; 
 }
 
-/* Opcional: sombra sutil arriba */
+
 footer::before {
   content: '';
   position: absolute;

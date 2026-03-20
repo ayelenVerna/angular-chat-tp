@@ -1,13 +1,13 @@
 <div class="chat-window">
 
-  <!-- Botón volver (mobile) -->
+ 
   <button class="back-btn" (click)="goBack()">
     ← Volver
   </button>
 
   @if (chat) {
 
-    <!-- Header -->
+  
     <div class="chat-header" [attr.data-id]="chat.id">
 
       <img [src]="chat.avatar" class="avatar">
@@ -24,14 +24,14 @@
         }
       </div>
 
-      <!-- 🔴 LOGOUT -->
+    
       <button class="logout-btn" (click)="logout()">
         Logout
       </button>
 
     </div>
 
-    <!-- Mensajes -->
+    
     <div class="messages">
 
       @for (msg of chat.messages; track $index) {
@@ -42,7 +42,7 @@
 
     </div>
 
-    <!-- Input -->
+   
     @if (currentUser !== null) {
       <app-chat-input
         (messageSent)="sendMessage($event)">

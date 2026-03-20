@@ -11,24 +11,24 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 })
 export class ChatList {
 
-  // 📥 lista de chats
+  
   @Input() chats: any[] = [];
 
-  // 📤 evento para seleccionar chat
+  
   @Output() chatSelected = new EventEmitter<any>();
 
-  // 📤 evento para crear nuevo chat
+  
   @Output() newChat = new EventEmitter<string>();
 
-  // 🧠 control del input (form reactivo)
+  
   newChatControl = new FormControl('');
 
-  // 👉 seleccionar chat
+  
   selectChat(chat: any) {
     this.chatSelected.emit(chat);
   }
 
-  // 👉 crear chat nuevo
+  
   createChat() {
     const name = this.newChatControl.value?.trim();
 
